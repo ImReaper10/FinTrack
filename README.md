@@ -42,7 +42,7 @@ Uses an FXML loader to manage UI components.
 │
 │── finance_tracker.db (SQLite database)
 │── FinTrack.iml
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 How to Run
 Clone the Repository
 sh
