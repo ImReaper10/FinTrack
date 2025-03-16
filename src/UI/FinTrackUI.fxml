@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="UI.FinTrackController">
+
+    <BorderPane maxWidth="600" maxHeight="500">
+        <top>
+            <Label text="FinTrack - Personal Finance Tracker"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-padding: 10px;"
+                   alignment="CENTER"/>
+        </top>
+
+        <center>
+            <VBox spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+                <GridPane hgap="10" vgap="10" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="100"/>
+                        <ColumnConstraints minWidth="200" hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="Amount:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="amountField" promptText="Enter amount" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Category:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="categoryField" promptText="Enter category" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Date (YYYY-MM-DD):" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="dateField" promptText="YYYY-MM-DD" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                </GridPane>
+
+                <HBox spacing="10" alignment="CENTER">
+                    <Button text="Add Income" onAction="#handleAddIncome"/>
+                    <Button text="Add Expense" onAction="#handleAddExpense"/>
+                </HBox>
+
+                <Label fx:id="messageLabel" text="" style="-fx-text-fill: red;"/>
+
+                <TableView fx:id="transactionsTable" minHeight="250">
+                    <columns>
+                        <TableColumn text="Date" fx:id="dateColumn" prefWidth="120"/>
+                        <TableColumn text="Category" fx:id="categoryColumn" prefWidth="120"/>
+                        <TableColumn text="Amount" fx:id="amountColumn" prefWidth="100"/>
+                        <TableColumn text="Type" fx:id="typeColumn" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </center>
+    </BorderPane>
+</StackPane>

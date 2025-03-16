@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinTrack - Expense Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input, button { margin: 5px; padding: 10px; }
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 10px; }
+    </style>
+</head>
+<body>
+<h1>FinTrack - Personal Finance Tracker</h1>
+
+<input type="text" id="amount" placeholder="Amount">
+<input type="text" id="category" placeholder="Category">
+<input type="date" id="date">
+<button onclick="addTransaction('income')">Add Income</button>
+<button onclick="addTransaction('expense')">Add Expense</button>
+<p id="message"></p>
+
+<table>
+    <thead>
+    <tr><th>Date</th><th>Category</th><th>Amount</th><th>Type</th></tr>
+    </thead>
+    <tbody id="transactionsTable"></tbody>
+</table>
+
+<script>
+        function addTransaction(type) {
+            let amount = document.getElementById("amount").value;
+            let category = document.getElementById("category").value;
+            let date = document.getElementById("date").value;
+
+            if (!amount || !category || !date) {
+                document.getElementById("message").innerText = "Please fill all fields.";
+                return;
+            }
+
+            // Call Java method from JavaScript
+            app.addTransaction(amount, category, date, type);
+            document.getElementById("message").innerText = "Transaction added!";
+            loadTransactions(); // Refresh transactions
+        }
+
+        function loadTransactions() {
+            let transactionsJson = app.getTransactions();
+            let transactions = JSON.parse(transactionsJson);
+            let table = document.getElementById("transactionsTable");
+            table.innerHTML = "";
+
+            transactions.forEach(t => {
+                let row = `<tr>
+                    <td>${t.date}</td>
+                    <td>${t.category}</td>
+                    <td>${t.amount}</td>
+                    <td>${t.type}</td>
+                </tr>`;
+                table.innerHTML += row;
+            });
+        }
+
+        window.onload = loadTransactions;
+    </script>
+</body>
+</html>
